@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="libs/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="css/cd-admin.css">
+</head>
+<body class="cd-admin-show-body">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>权限名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" placeholder="请输入权限名" lay-verify="required" autocomplete="off" class="layui-input" value="添加医生">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                url
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="url" placeholder="请输入url地址" autocomplete="off" class="layui-input" value="/Doctor/add">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>上级权限
+            </label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" name="parent_id">
+                    <option value="">请选择上级权限</option>
+                    <option value="0">顶级</option>
+                    <option value="1" selected>医生管理</option>
+                    <option value="2">&nbsp;&nbsp;&nbsp;&nbsp;医生列表</option>
+                    <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加医生</option>
+                    <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑医生</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>排序
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="sort" placeholder="请输入排序" lay-verify="number" autocomplete="off" class="layui-input" value="50">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>状态
+            </label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" name="status">
+                    <option value="1" selected>启用</option>
+                    <option value="2">禁用</option>
+                </select>
+            </div>
+        </div>
+      
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    <script src="libs/layui/layui.js" charset="utf-8"></script>
+    <script src="js/cd-admin.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function(){
+            var form = layui.form
+            $ = layui.jquery;
+          
+            //监听提交
+            form.on(
+                'submit(submit)', 
+                function(data){
+                    console.log(JSON.stringify(data.field));
+                    //ajax请求
+                    $.ajax({
+                        type : 'POST',//请求类型
+                        url : "",//请求地址
+                        data : eval('('+JSON.stringify(data.field)+')'),//请求数据
+                        async : true,//是否为异步
+                        cache : false,//是否缓存
+                        success : function(data){
+                            if(data){
+                                layer.alert(
+                                    '成功',
+                                    {icon: 6},
+                                    function(){
+                                        parent.location.reload();
+                                        // 获得frame索引
+                                        var index = parent.layer.getFrameIndex(window.name);
+                                        //关闭当前frame
+                                        parent.layer.close(index);
+                                    }
+                                );
+                            }else{
+                                layer.alert('失败', {icon: 5});
+                            }
+                        }
+                    });
+                    return false;
+                }
+            );
+
+        });
+    </script>
+</body>
+</html>

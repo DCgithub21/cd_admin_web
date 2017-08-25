@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="libs/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="css/cd-admin.css">
+</head>
+<body class="cd-admin-show-body">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>登录名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" placeholder="请输入登录名" lay-verify="required" autocomplete="off" class="layui-input" value="admin">
+            </div>
+            <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>角色
+            </label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" name="role_id">
+                    <option value="">请选择角色</option>
+                    <option value="1" selected>超级管理员</option>
+                    <option value="2">普通管理员</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
+            </div>
+        </div>
+    </form>
+    <script src="libs/layui/layui.js" charset="utf-8"></script>
+    <script src="js/cd-admin.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function(){
+            var form = layui.form
+            $ = layui.jquery;
+          
+            //监听提交
+            form.on(
+                'submit(submit)', 
+                function(data){
+                    console.log(JSON.stringify(data.field));
+                    //ajax请求
+                    $.ajax({
+                        type : 'POST',//请求类型
+                        url : "",//请求地址
+                        data : eval('('+JSON.stringify(data.field)+')'),//请求数据
+                        async : true,//是否为异步
+                        cache : false,//是否缓存
+                        success : function(data){
+                            if(data){
+                                layer.alert(
+                                    '成功',
+                                    {icon: 6},
+                                    function(){
+                                        parent.location.reload();
+                                        // 获得frame索引
+                                        var index = parent.layer.getFrameIndex(window.name);
+                                        //关闭当前frame
+                                        parent.layer.close(index);
+                                    }
+                                );
+                            }else{
+                                layer.alert('失败', {icon: 5});
+                            }
+                        }
+                    });
+                    return false;
+                }
+            );
+
+        });
+    </script>
+</body>
+</html>

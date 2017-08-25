@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/cd-admin.css">
+</head>
+<body class="cd-admin-body">
+<div class="cd-admin-head-div">
+    <form class="layui-form">
+        <div class="layui-inline">
+            <input class="layui-input" name="keyword" placeholder="搜索">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+        <div class="cd-float-right">
+            <span class="layui-btn" onclick="cd_admin_show('添加','access_add.html')"><i class="layui-icon">&#xe608;</i>添加</span>
+        </div>
+    </form>
+        
+    </div>
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>权限</th>
+                <th>url</th>
+                <th>上级权限</th>
+                <th>菜单层级</th>
+                <th>排序</th>
+                <th>状态</th>
+                <th>添加时间</th>
+                <th>更新时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>用户管理</td>
+                <td>无</td>
+                <td>顶级</td>
+                <td>2</td>
+                <td>50</td>
+                <td>
+                    <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                </td>
+                <td>2017-08-22 17:16:23</td>
+                <td>2017-08-22 17:16:23</td>
+                <td>
+                    <a title="编辑" href="javascript:;" onclick="cd_admin_show('编辑','access_edit.html')">
+                        <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe642;</i>编辑</span>
+                    </a>
+                    <a title="停用" href="javascript:;" onclick="cd_admin_change(1,0,'停用','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe601;</i>停用</span>
+                    </a>
+                    <a title="删除" href="javascript:;" onclick="cd_admin_del(1,'admin1','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe640;</i>删除</span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>用户列表</td>
+                <td>/User/index</td>
+                <td>用户管理</td>
+                <td>2</td>
+                <td>50</td>
+                <td>
+                    <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                </td>
+                <td>2017-08-22 17:16:23</td>
+                <td>2017-08-22 17:16:23</td>
+                <td>
+                    <a title="编辑" href="javascript:;" onclick="cd_admin_show('编辑','access_edit.html')">
+                        <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe642;</i>编辑</span>
+                    </a>
+                    <a title="停用" href="javascript:;" onclick="cd_admin_change(1,0,'停用','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe601;</i>停用</span>
+                    </a>
+                    <a title="删除" href="javascript:;" onclick="cd_admin_del(1,'admin1','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe640;</i>删除</span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>添加用户</td>
+                <td>/User/add</td>
+                <td>用户列表</td>
+                <td>3</td>
+                <td>50</td>
+                <td>
+                    <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                </td>
+                <td>2017-08-22 17:16:23</td>
+                <td>2017-08-22 17:16:23</td>
+                <td>
+                    <a title="编辑" href="javascript:;" onclick="cd_admin_show('编辑','access_edit.html')">
+                        <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe642;</i>编辑</span>
+                    </a>
+                    <a title="停用" href="javascript:;" onclick="cd_admin_change(1,0,'停用','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe601;</i>停用</span>
+                    </a>
+                    <a title="删除" href="javascript:;" onclick="cd_admin_del(1,'admin1','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe640;</i>删除</span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>编辑用户</td>
+                <td>/User/edit</td>
+                <td>用户列表</td>
+                <td>3</td>
+                <td>50</td>
+                <td>
+                    <span class="layui-btn layui-btn-danger layui-btn-mini">已禁用</span>
+                </td>
+                <td>2017-08-22 17:16:23</td>
+                <td>2017-08-22 17:16:23</td>
+                <td>
+                    <a title="编辑" href="javascript:;" onclick="cd_admin_show('编辑','access_edit.html')">
+                        <span class="layui-btn layui-btn-mini"><i class="layui-icon">&#xe642;</i>编辑</span>
+                    </a>
+                    <a title="停用" href="javascript:;" onclick="cd_admin_change(1,0,'停用','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe601;</i>停用</span>
+                    </a>
+                    <a title="删除" href="javascript:;" onclick="cd_admin_del(1,'admin1','')">
+                        <span class="layui-btn layui-btn-danger layui-btn-mini"><i class="layui-icon">&#xe640;</i>删除</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="test1"></div>
+
+    <script src="libs/layui/layui.js"></script>
+    <script src="js/cd-admin.js"></script>
+    <script>
+        layui.use(['laypage','form','layer'], function(){
+            var laypage = layui.laypage;
+            $ = layui.jquery;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'test1', //注意，这里的 test1 是 ID，不用加 # 号
+                count: 500, //数据总数 //从服务端得到
+                curr: 1,
+                limits: [10, 20, 30, 40, 50],
+                layout: ['prev', 'page', 'next','count','skip','limit'],
+                jump: function(obj, first){
+                    //console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                    //第一次不执行
+                    if(!first){
+                        //do something
+                        /*url = '/p/'+obj.curr+'/limit/'+obj.limit;
+                        location.href = url;*/
+                    }
+                }
+            });
+
+        });
+
+        
+
+    </script>
+</body>
+</html>

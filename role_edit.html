@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="libs/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="css/cd-admin.css">
+</head>
+<body class="cd-admin-show-body">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>角色名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="username" placeholder="请输入角色名" lay-verify="required" autocomplete="off" class="layui-input" value="普通管理员">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="layui-badge-dot"></span>拥有权限
+            </label>
+            <div class="layui-input-block">
+                <table class="layui-table ">
+                    <tr>
+                        <td>用户管理</td>
+                        <td>
+                            <input type="checkbox" name="access[]" value="1" title="用户列表" checked>
+                            <input type="checkbox" name="access[]" value="1" title="添加用户" checked>
+                            <input type="checkbox" name="access[]" value="2" title="编辑用户" checked>
+                            <input type="checkbox" name="access[]" value="3" title="更改用户状态">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>商品管理</td>
+                        <td>
+                            <input type="checkbox" name="access[]" value="5" title="商品列表" checked>
+                            <input type="checkbox" name="access[]" value="5" title="添加商品" checked>
+                            <input type="checkbox" name="access[]" value="6" title="编辑商品" checked>
+                            <input type="checkbox" name="access[]" value="7" title="更改商品状态">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入描述内容" class="layui-textarea" name="remark">只拥有普通权限</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
+            </div>
+        </div>
+    </form>
+    <script src="libs/layui/layui.js" charset="utf-8"></script>
+    <script src="js/cd-admin.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function(){
+            var form = layui.form
+            $ = layui.jquery;
+          
+            //监听提交
+            form.on(
+                'submit(submit)', 
+                function(data){
+                    console.log(JSON.stringify(data.field));
+                    //ajax请求
+                    $.ajax({
+                        type : 'POST',//请求类型
+                        url : "",//请求地址
+                        data : eval('('+JSON.stringify(data.field)+')'),//请求数据
+                        async : true,//是否为异步
+                        cache : false,//是否缓存
+                        success : function(data){
+                            if(data){
+                                layer.alert(
+                                    '成功',
+                                    {icon: 6},
+                                    function(){
+                                        parent.location.reload();
+                                        // 获得frame索引
+                                        var index = parent.layer.getFrameIndex(window.name);
+                                        //关闭当前frame
+                                        parent.layer.close(index);
+                                    }
+                                );
+                            }else{
+                                layer.alert('失败', {icon: 5});
+                            }
+                        }
+                    });
+                    return false;
+                }
+            );
+
+        });
+    </script>
+</body>
+</html>
