@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            登录｜后台管理
+        </title>
+        <link rel="stylesheet" href="libs/layui/css/layui.css" media="all">
+        <link rel="stylesheet" href="css/cd-admin.css" media="all">
+		<link rel="stylesheet" href="css/x-admin.css" media="all">
+    </head>
+    
+    <body style="background-color: #393D49">
+        <div class="x-box">
+            <div class="x-top">
+                
+            </div>
+            <div class="x-mid">
+                <div class="x-avtar">
+                    <img src="images/logo.jpg" alt="">
+                </div>
+                <div class="input">
+                    <form class="layui-form" method="post">
+                        <div class="layui-form-item x-login-box">
+                            <label for="username" class="layui-form-label">
+                                <i class="layui-icon">&#xe612;</i>
+                            </label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="username" name="username" required="" lay-verify="required"
+                                autocomplete="off" placeholder="username" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item x-login-box">
+                            <label for="pass" class="layui-form-label">
+                                <i class="layui-icon">&#xe60f;</i>
+                            </label>
+                            <div class="layui-input-inline">
+                                <input type="password" id="pass" name="password" required="" lay-verify="required"
+                                autocomplete="off" placeholder="******" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="loginbtn">
+                            <button  class="layui-btn" lay-filter="save" lay-submit="">
+                                登 录
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <p style="color:#fff;text-align: center;">Copyright ©2017 电子商城 v1.0 All Rights Reserved. </p>
+        <script src="libs/layui/layui.js" charset="utf-8"></script>
+        <script>
+
+            layui.use(
+                ['form'],
+                function() {
+                    $ = layui.jquery;
+                    var form = layui.form;
+                    layer = layui.layer;
+					
+                    //监听提交
+                    form.on(
+                        'submit(save)',
+                        function(data) {
+							
+                            //ajax请求
+                            $.ajax({
+                                type : 'POST',//请求类型
+                                url : '',//请求地址
+                                data : eval('('+JSON.stringify(data.field)+')'),//请求数据，String型
+                                async : true,//是否为异步
+                                cache : false,//是否缓存
+                                success : function(data){
+                                    if(data){
+                                        layer.alert(
+                                            '成功',
+                                            {icon: 6},
+                                            function(){
+                                                location.href = "index.html";
+                                            }
+                                        );
+                                    }else{
+                                        layer.alert('失败', {icon: 5});
+                                    }
+                                }
+                            });
+                            return false;
+                        }
+                    );
+
+                }
+            );
+
+        </script>
+    </body>
+
+</html>
